@@ -1,0 +1,2 @@
+# PracticaPosLaravel
+Practica pos
