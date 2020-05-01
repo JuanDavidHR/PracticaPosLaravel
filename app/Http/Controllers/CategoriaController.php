@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Categoria;
-use Illuminate\Support\Facades\DB;
+//use Illuminate\Support\Facades\DB;
 
 class CategoriaController extends Controller
 {
@@ -15,18 +15,26 @@ class CategoriaController extends Controller
      */
     public function index(Request $request)
     {
-        //if(!$request->ajax()) return redirect('/');
-        $catgoria =Categoria::paginate(2);  
+        if(!$request->ajax()) return redirect('/');
+        $buscar=$request->buscar;
+        $criterio= $request->criterio;
+        if($buscar==''){
+            $categorias =Categoria::orderBy('id','desc')->paginate(4);
+        }else{
+            $categorias = Categoria::where($criterio,'like','%'. $buscar . '%')->orderBy('id','desc')->paginate(4);
+        }
+
+          
         return [
             'pagination' =>[
-                'total'=> $catgoria->total(),
-                'current_page' => $catgoria->currentPage(),
-                'per_page' =>$catgoria->perPage(),
-                'last_page' => $catgoria->lastPage(),
-                'from' => $catgoria->firstItem(),
-                'to' => $catgoria->lastItem(),
+                'total'=> $categorias->total(),
+                'current_page' => $categorias->currentPage(),
+                'per_page' =>$categorias->perPage(),
+                'last_page' => $categorias->lastPage(),
+                'from' => $categorias->firstItem(),
+                'to' => $categorias->lastItem(),
             ],
-            'categorias' => $catgoria
+            'categorias' => $categorias
         ];
     }
 
@@ -40,11 +48,11 @@ class CategoriaController extends Controller
     {
         if (!$request->ajax()) return redirect('/');
 
-        $catgoria = new Categoria();
-        $catgoria->nombre = $request->nombre;
-        $catgoria->descripcion = $request->descripcion;
-        $catgoria->condicion = '1';
-        $catgoria->save();
+        $categorias = new Categoria();
+        $categorias->nombre = $request->nombre;
+        $categorias->descripcion = $request->descripcion;
+        $categorias->condicion = '1';
+        $categorias->save();
     }
 
     /**
@@ -58,27 +66,27 @@ class CategoriaController extends Controller
     {
         if (!$request->ajax()) return redirect('/');
 
-        $catgoria = Categoria::findOrFail($request->id);
-        $catgoria->nombre = $request->nombre;
-        $catgoria->descripcion = $request->descripcion;
-        $catgoria->condicion = '1';
-        $catgoria->save();
+        $categorias = Categoria::findOrFail($request->id);
+        $categorias->nombre = $request->nombre;
+        $categorias->descripcion = $request->descripcion;
+        $categorias->condicion = '1';
+        $categorias->save();
     }
     public function desactivar(Request $request)
     {
         if (!$request->ajax()) return redirect('/');
 
-        $catgoria = Categoria::findOrFail($request->id);
-        $catgoria->condicion = '0';
-        $catgoria->save();
+        $categorias = Categoria::findOrFail($request->id);
+        $categorias->condicion = '0';
+        $categorias->save();
     }
     public function activar(Request $request)
     {
        if (!$request->ajax()) return redirect('/');
         
-        $catgoria = Categoria::findOrFail($request->id);
-        $catgoria->condicion = '1';
-        $catgoria->save();
+        $categorias = Categoria::findOrFail($request->id);
+        $categorias->condicion = '1';
+        $categorias->save();
     }
 
 }
