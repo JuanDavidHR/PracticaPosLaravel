@@ -2,9 +2,7 @@
             <main class="main">
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
-                <li class="breadcrumb-item">Home</li>
-                <li class="breadcrumb-item"><a href="#">Admin</a></li>
-                <li class="breadcrumb-item active">Dashboard</li>
+                <li class="breadcrumb-item"><a href="/">Escritorio</a></li>
             </ol>
             <div class="container-fluid">
                 <!-- Ejemplo de tabla Listado -->
@@ -157,7 +155,7 @@
                 },
                 offset : 3,
                 criterio : 'nombre',
-                buscar : '',
+                buscar : ''
             }
         },
         computed:{
@@ -190,9 +188,9 @@
             }
         },
         methods : {
-            listarCategoria (page, buscar,criterio){
+            listarCategoria (page,buscar,criterio){
                 let me=this;
-                var url= '/categoria?page=' + page + '&buscar='+ buscar + '&criterio=' + criterio;
+                var url= '/categoria?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio;
                 axios.get(url).then(function (response) {
                     var respuesta= response.data;
                     me.arrayCategoria = respuesta.categorias.data;
@@ -221,7 +219,7 @@
                     'descripcion': this.descripcion
                 }).then(function (response) {
                     me.cerrarModal();
-                    me.listarCategoria(1,'',nombre);
+                    me.listarCategoria(1,'','nombre');
                 }).catch(function (error) {
                     console.log(error);
                 });
@@ -239,7 +237,7 @@
                     'id': this.categoria_id
                 }).then(function (response) {
                     me.cerrarModal();
-                    me.listarCategoria(1,'',nombre);
+                    me.listarCategoria(1,'','nombre');
                 }).catch(function (error) {
                     console.log(error);
                 }); 
@@ -264,7 +262,7 @@
                     axios.put('/categoria/desactivar',{
                         'id': id
                     }).then(function (response) {
-                        me.listarCategoria(1,'',nombre);
+                        me.listarCategoria(1,'','nombre');
                         swal(
                         'Desactivado!',
                         'El registro ha sido desactivado con éxito.',
@@ -303,7 +301,7 @@
                     axios.put('/categoria/activar',{
                         'id': id
                     }).then(function (response) {
-                        me.listarCategoria(1,'',nombre);
+                        me.listarCategoria(1,'','nombre');
                         swal(
                         'Activado!',
                         'El registro ha sido activado con éxito.',
