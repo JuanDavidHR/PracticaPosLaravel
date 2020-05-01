@@ -50091,7 +50091,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         desactivarCategoria: function desactivarCategoria(id) {
             var _this = this;
 
-            swal({
+            swal.fire({
                 title: 'Esta seguro de desactivar esta categoría?',
                 type: 'warning',
                 showCancelButton: true,
@@ -50123,7 +50123,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         activarCategoria: function activarCategoria(id) {
             var _this2 = this;
 
-            swal({
+            swal.fire({
                 title: 'Esta seguro de activar esta categoría?',
                 type: 'warning',
                 showCancelButton: true,

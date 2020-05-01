@@ -243,7 +243,7 @@
                 }); 
             },
             desactivarCategoria(id){
-               swal({
+               swal.fire({
                 title: 'Esta seguro de desactivar esta categoría?',
                 type: 'warning',
                 showCancelButton: true,
@@ -282,7 +282,7 @@
                 }) 
             },
             activarCategoria(id){
-               swal({
+               swal.fire({
                 title: 'Esta seguro de activar esta categoría?',
                 type: 'warning',
                 showCancelButton: true,
