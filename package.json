@@ -19,5 +19,8 @@
         "popper.js": "^1.12",
         "sweetalert2": "^9.10.12",
         "vue": "^2.5.7"
+    },
+    "dependencies": {
+        "vue-barcode": "^1.2.0"
     }
 }
