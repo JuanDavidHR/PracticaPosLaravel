@@ -10,4 +10,7 @@ class Persona extends Model
     public  function proveedor(){
         return this.hasOne('App\Proveedor');
     }
+    public  function user(){
+        return this.hasOne('App\User');
+    }
 }
