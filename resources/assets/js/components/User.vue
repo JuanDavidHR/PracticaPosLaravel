@@ -405,7 +405,7 @@
                 }
             },
             desactivarUsuario(id){
-               swal({
+               swal.fire({
                 title: 'Esta seguro de desactivar este usuario?',
                 type: 'warning',
                 showCancelButton: true,
@@ -444,7 +444,7 @@
                 }) 
             },
             activarUsuario(id){
-               swal({
+               swal.fire({
                 title: 'Esta seguro de activar este usuario?',
                 type: 'warning',
                 showCancelButton: true,

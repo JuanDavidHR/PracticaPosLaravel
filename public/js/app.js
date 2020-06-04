@@ -59180,7 +59180,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         desactivarUsuario: function desactivarUsuario(id) {
             var _this = this;
 
-            swal({
+            swal.fire({
                 title: 'Esta seguro de desactivar este usuario?',
                 type: 'warning',
                 showCancelButton: true,
@@ -59212,7 +59212,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         activarUsuario: function activarUsuario(id) {
             var _this2 = this;
 
-            swal({
+            swal.fire({
                 title: 'Esta seguro de activar este usuario?',
                 type: 'warning',
                 showCancelButton: true,

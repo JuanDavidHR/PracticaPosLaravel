@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
+
 use App\User;
 use App\Persona;
 use App\Rol;
-use Illuminate\Support\Facades\DB;
-
-use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -24,7 +25,7 @@ class UserController extends Controller
             'personas.num_documento','personas.direccion','personas.telefono',
             'personas.email','users.usuario','users.password',
             'users.condicion','users.idrol','roles.nombre as rol')
-            ->orderBy('personas.id', 'desc')->paginate(3);
+            ->orderBy('personas.id', 'desc')->paginate(5);
         }
         else{
             $personas = User::join('personas','users.id','=','personas.id')
@@ -34,7 +35,7 @@ class UserController extends Controller
             'personas.email','users.usuario','users.password',
             'users.condicion','users.idrol','roles.nombre as rol')            
             ->where('personas.'.$criterio, 'like', '%'. $buscar . '%')
-            ->orderBy('personas.id', 'desc')->paginate(3);
+            ->orderBy('personas.id', 'desc')->paginate(5);
         }
         
 
@@ -50,29 +51,31 @@ class UserController extends Controller
             'personas' => $personas
         ];
     }
+
     public function store(Request $request)
     {
         if (!$request->ajax()) return redirect('/');
         
         try{
             DB::beginTransaction();
-            $persona = new Persona();
-            $persona->nombre = $request->nombre;
-            $persona->tipo_documento = $request->tipo_documento;
-            $persona->num_documento = $request->num_documento;
-            $persona->direccion = $request->direccion;
-            $persona->telefono = $request->telefono;
-            $persona->email = $request->email;
-            $persona->save();
+            $personas = new Persona();
+            $personas->nombre = $request->nombre;
+            $personas->tipo_documento = $request->tipo_documento;
+            $personas->num_documento = $request->num_documento;
+            $personas->direccion = $request->direccion;
+            $personas->telefono = $request->telefono;
+            $personas->email = $request->email;
+            $personas->save();
 
-            $user = new User();
-            $user->usuario = $request->usuario;
-            $user->password = bcrypt($request->password);
-            $user->condicion = '1';
-            $user->idrol = $request->idrol;
+            $users = new User();
+            $users->usuario = $request->usuario;
+            $users->password = bcrypt( $request->password);
+            $users->condicion = '1';
+            $users->idrol = $request->idrol;          
 
-            $user->id = $persona->id;
-            $user->save();
+            $users->id = $personas->id;
+
+            $users->save();
 
             DB::commit();
 
@@ -86,30 +89,31 @@ class UserController extends Controller
 
     public function update(Request $request)
     {
-        if (!$request->ajax()) return redirect('/');
+       if (!$request->ajax()) return redirect('/');
         
         try{
             DB::beginTransaction();
 
-            //Buscar primero el proveedor a modificar
-            $user = User::findOrFail($request->id);
+            //Buscar primero el usuario a modificar
+            $users = User::findOrFail($request->id);
 
-            $persona = Persona::findOrFail($user->id);
+            $personas = Persona::findOrFail($users->id);
 
-            $persona->nombre = $request->nombre;
-            $persona->tipo_documento = $request->tipo_documento;
-            $persona->num_documento = $request->num_documento;
-            $persona->direccion = $request->direccion;
-            $persona->telefono = $request->telefono;
-            $persona->email = $request->email;
-            $persona->save();
+            $personas->nombre = $request->nombre;
+            $personas->tipo_documento = $request->tipo_documento;
+            $personas->num_documento = $request->num_documento;
+            $personas->direccion = $request->direccion;
+            $personas->telefono = $request->telefono;
+            $personas->email = $request->email;
+            $personas->save();
 
             
-            $user->usuario = $request->usuario;
-            $user->password = bcrypt($request->password);
-            $user->condicion = '1';
-            $user->idrol = $request->idrol;
-            $user->save();
+            $users->usuario = $request->usuario;
+            $users->password = bcrypt( $request->password);
+            $users->condicion = '1';
+            $users->idrol = $request->idrol;
+            $users->save();
+
 
             DB::commit();
 
@@ -118,20 +122,21 @@ class UserController extends Controller
         }
 
     }
+
     public function desactivar(Request $request)
     {
         if (!$request->ajax()) return redirect('/');
-
         $user = User::findOrFail($request->id);
         $user->condicion = '0';
         $user->save();
     }
+
     public function activar(Request $request)
     {
-       if (!$request->ajax()) return redirect('/');
-        
+        if (!$request->ajax()) return redirect('/');
         $user = User::findOrFail($request->id);
         $user->condicion = '1';
         $user->save();
     }
+
 }
