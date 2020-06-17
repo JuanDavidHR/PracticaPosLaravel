@@ -1973,7 +1973,7 @@ tbody.collapse.show {
   top: 100%;
   left: 0;
   z-index: 1000;
-  display: none;
+  display: block;
   float: left;
   min-width: 10rem;
   padding: 0 0;
@@ -2358,7 +2358,6 @@ tbody.collapse.show {
 
 .nav {
   display: -ms-flexbox;
-  display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   padding-left: 0;
@@ -2462,7 +2461,6 @@ tbody.collapse.show {
   margin-bottom: 0;
   list-style: none; }
   .navbar-nav .nav-link, .navbar-nav .navbar .dropdown-toggle, .navbar .navbar-nav .dropdown-toggle {
-    padding-right: 0;
     padding-left: 0; }
   .navbar-nav .dropdown-menu {
     position: static;
@@ -7263,7 +7261,8 @@ button {
   color: #fff; }
 
 .card-header .btn {
-  margin-top: -0.5rem; }
+    margin-top: -0.5rem;
+  }
 
 .card-header .btn-sm, .card-header .btn-group-sm > .btn {
   margin-top: -0.25rem; }
@@ -7440,7 +7439,11 @@ base-chart.chart {
   padding: 0 1rem;
   color: #151b1e;
   background: #f0f3f5;
-  border-top: 1px solid #c2cfd6; }
+  border-top: 1px solid #c2cfd6;
+  clear: both;
+  position: relative;
+  margin-top: auto;
+}
 
 .row.row-equal {
   padding-right: 7.5px;

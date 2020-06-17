@@ -19,12 +19,15 @@
     <div id="app">
         <header class="app-header navbar">
             <button class="navbar-toggler mobile-sidebar-toggler d-lg-none mr-auto" type="button">
-            <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
             </button>
             <a class="navbar-brand" href="#"></a>
             <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button">
-            <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
             </button>
+            <div class="dropdown">
+      <!-- Link or button to toggle dropdown -->
+    </div>
             <ul class="nav navbar-nav d-md-down-none">
                 <li class="nav-item px-3">
                     <a class="nav-link" href="#">Escritorio</a>
@@ -54,11 +57,12 @@
                     </div>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                         <img src="img/avatars/6.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
                         <span class="d-md-down-none">{{Auth::user()->usuario}} </span>
                     </a>
-                    <div class="dropdown-menu dropdown-menu-right">
+                    <div class="dropdown-menu dropdown-menu-right ">
                         <div class="dropdown-header text-center">
                             <strong>Cuenta</strong>
                         </div>
@@ -73,7 +77,6 @@
                 </li>
             </ul>
         </header>
-
         <div class="app-body">
             
             @if(Auth::check())
@@ -84,21 +87,19 @@
                 @elseif (Auth::user()->idrol == 3)
                     @include('plantilla.sidebaralmacenero')
                 @else
-
                 @endif
 
             @endif
             <!-- Contenido Principal -->
             @yield('contenido')
             <!-- /Fin del contenido principal -->
-        </div>   
+   
+        </div>
+        </div>
     </div>
     <footer class="app-footer">
-        <span><a href="http://www.incanatoit.com/">IncanatoIT</a> &copy; 2017</span>
-        <span class="ml-auto">Desarrollado por <a href="http://www.incanatoit.com/">IncanatoIT</a></span>
+        <span><a href="">ProGamers</a> &copy; 2019-2020</span>
     </footer>
-    
-
     <script src="js/app.js"></script>
     <script src="js/plantilla.js"></script>
 </body>
